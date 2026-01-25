@@ -16,11 +16,20 @@ function ProductPage({ products = [] }) {
   const [qty, setQty] = useState(1);
   const [isAdded, setIsAdded] = useState(false);
 
-  // ha másik termékre navigálsz, reseteljük
   useEffect(() => {
     setQty(1);
     setIsAdded(false);
   }, [id]);
+
+  const relatedProducts = useMemo(() => {
+    if (!product) return [];
+    const cat = String(product.category || "").toLowerCase();
+
+    return products
+      .filter((p) => String(p.id) !== String(product.id))
+      .filter((p) => String(p.category || "").toLowerCase() === cat)
+      .slice(0, 4);
+  }, [products, product]);
 
   if (!product) {
     return (
@@ -46,9 +55,7 @@ function ProductPage({ products = [] }) {
   const inc = () => setQty((q) => Math.min(99, q + 1));
 
   const handleAdd = () => {
-    // qty darabot adunk hozzá úgy, hogy többször hívjuk
     for (let i = 0; i < qty; i++) addToCart(product);
-
     setIsAdded(true);
     setTimeout(() => setIsAdded(false), 900);
   };
@@ -80,13 +87,9 @@ function ProductPage({ products = [] }) {
 
           <div className="product-actions">
             <div className="qty-controls">
-              <button className="qty-btn" onClick={dec}>
-                -
-              </button>
+              <button className="qty-btn" onClick={dec}>-</button>
               <span className="qty-num">{qty}</span>
-              <button className="qty-btn" onClick={inc}>
-                +
-              </button>
+              <button className="qty-btn" onClick={inc}>+</button>
             </div>
 
             <button
@@ -102,8 +105,45 @@ function ProductPage({ products = [] }) {
           </p>
         </div>
       </div>
+
+      {/* Kapcsolódó termékek */}
+      {relatedProducts.length > 0 && (
+        <section className="related-section">
+          <h2 className="related-title">Kapcsolódó termékek</h2>
+
+          <div className="related-grid">
+            {relatedProducts.map((p) => (
+              <div
+                key={p.id}
+                className="related-card"
+                onClick={() => navigate(`/product/${p.id}`)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => e.key === "Enter" && navigate(`/product/${p.id}`)}
+              >
+                <div className="related-imgwrap">
+                  <img src={p.image} alt={p.name} />
+                </div>
+
+                <div className="related-info">
+                  <div className="related-name">{p.name}</div>
+                  <div className="related-meta">
+                    <span>{p.category}</span>
+                    {typeof p.price === "number" && (
+                      <span className="related-price">
+                        {p.price.toLocaleString("hu-HU")} Ft
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
     </main>
   );
 }
 
 export default ProductPage;
+
