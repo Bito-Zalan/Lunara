@@ -46,7 +46,7 @@ function App() {
   return (
     <CartProvider>
       <Router>
-        <Header />
+        <Header products={products} />
         <div className="page-divider"></div>
 
         <Routes>

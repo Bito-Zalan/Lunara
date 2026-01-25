@@ -1,0 +1,20 @@
+.add-to-cart-btn {
+  padding: 0.6rem 1.2rem;
+  background-color: #e73861;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.1s ease, background-color 0.2s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #c1274b;
+}
+
+/* Kattintás animáció */
+.add-to-cart-btn.clicked {
+  transform: scale(0.9); /* kicsit összenyomódik */
+  background-color: #d32f55;
+}

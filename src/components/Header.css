@@ -124,6 +124,17 @@
   height: 20px;
 }
 
+.search-input {
+  margin-left: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+  outline: none;
+  transition: width 0.3s ease;
+  width: 150px;
+}
+
 .hamburger-icon{
   color: #e73861;
   cursor: pointer;
