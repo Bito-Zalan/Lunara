@@ -16,9 +16,23 @@ function ProductPage({ products = [] }) {
   const [qty, setQty] = useState(1);
   const [isAdded, setIsAdded] = useState(false);
 
+  // Galéria
+  const images = useMemo(() => {
+    if (!product) return [];
+    // később: product.images = ["...", "..."]
+    if (Array.isArray(product.images) && product.images.length > 0) {
+      return product.images;
+    }
+    // most: fallback az egyetlen image mezőre
+    return product.image ? [product.image] : [];
+  }, [product]);
+
+  const [activeImgIdx, setActiveImgIdx] = useState(0);
+
   useEffect(() => {
     setQty(1);
     setIsAdded(false);
+    setActiveImgIdx(0);
   }, [id]);
 
   const relatedProducts = useMemo(() => {
@@ -69,8 +83,34 @@ function ProductPage({ products = [] }) {
       </div>
 
       <div className="product-layout">
-        <div className="product-image-wrap">
-          <img className="product-image" src={product.image} alt={product.name} />
+        {/* GALÉRIA */}
+        <div className="product-gallery">
+          <div className="product-image-wrap">
+            {images.length > 0 ? (
+              <img
+                className="product-image"
+                src={images[Math.min(activeImgIdx, images.length - 1)]}
+                alt={product.name}
+              />
+            ) : (
+              <div className="product-image-placeholder">Nincs kép</div>
+            )}
+          </div>
+
+          {images.length > 1 && (
+            <div className="product-thumbs">
+              {images.map((src, idx) => (
+                <button
+                  key={`${src}-${idx}`}
+                  className={`thumb ${idx === activeImgIdx ? "active" : ""}`}
+                  onClick={() => setActiveImgIdx(idx)}
+                  type="button"
+                >
+                  <img src={src} alt={`${product.name} - ${idx + 1}`} />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="product-info">
@@ -87,9 +127,13 @@ function ProductPage({ products = [] }) {
 
           <div className="product-actions">
             <div className="qty-controls">
-              <button className="qty-btn" onClick={dec}>-</button>
+              <button className="qty-btn" onClick={dec}>
+                -
+              </button>
               <span className="qty-num">{qty}</span>
-              <button className="qty-btn" onClick={inc}>+</button>
+              <button className="qty-btn" onClick={inc}>
+                +
+              </button>
             </div>
 
             <button
@@ -146,4 +190,5 @@ function ProductPage({ products = [] }) {
 }
 
 export default ProductPage;
+
 
