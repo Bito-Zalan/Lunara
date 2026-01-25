@@ -1,6 +1,7 @@
 // Header.jsx
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useCart } from "../context/CartContext";
 import logo from "../assets/weblogo.png";
 import "./Header.css";
 
@@ -10,6 +11,24 @@ import NavDrawer from "./NavDrawer";
 function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
+
+  const { cartItems } = useCart();
+  const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
+  const [isBumping, setIsBumping] = useState(false);
+
+  // Animáció triggerelése, amikor változik a kosár
+  useEffect(() => {
+    if (totalQuantity === 0) return;
+
+    setIsBumping(true);
+
+    const timer = setTimeout(() => {
+      setIsBumping(false);
+    }, 300); // animáció időtartama 0.3s
+
+    return () => clearTimeout(timer);
+  }, [totalQuantity]);
 
   return (
     <>
@@ -60,6 +79,7 @@ function Header() {
             <div
               className="cart-icon"
               onClick={() => setIsCartOpen(true)}
+              style={{ position: "relative" }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -68,6 +88,13 @@ function Header() {
               >
                 <path d="M8 1a2 2 0 0 1 2 2v2H6V3a2 2 0 0 1 2-2m3 4V3a3 3 0 1 0-6 0v2H3.36a1.5 1.5 0 0 0-1.483 1.277L.85 13.13A2.5 2.5 0 0 0 3.322 16h9.355a2.5 2.5 0 0 0 2.473-2.87l-1.028-6.853A1.5 1.5 0 0 0 12.64 5zm-1 1v1.5a.5.5 0 0 0 1 0V6h1.639a.5.5 0 0 1 .494.426l1.028 6.851A1.5 1.5 0 0 1 12.678 15H3.322a1.5 1.5 0 0 1-1.483-1.723l1.028-6.851A.5.5 0 0 1 3.36 6H5v1.5a.5.5 0 1 0 1 0V6z" />
               </svg>
+
+              {/* Kosár badge */}
+              {totalQuantity > 0 && (
+                <span className={`cart-badge ${isBumping ? "bump" : ""}`}>
+                  {totalQuantity}
+                </span>
+              )}
             </div>
           </div>
         </nav>
@@ -88,13 +115,3 @@ function Header() {
 }
 
 export default Header;
-
-
-
-
-
-
-
-
-
-

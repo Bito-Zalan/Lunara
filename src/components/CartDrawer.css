@@ -93,3 +93,21 @@
   font-weight: bold;
   color: #e73861;
 }
+
+.checkout-btn {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #e73861;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.checkout-btn:hover {
+  background-color: #c1274b;
+}
+

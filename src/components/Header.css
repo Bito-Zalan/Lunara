@@ -79,6 +79,39 @@
   height: 30px;
 }
 
+/* Kosár badge */
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #e73861;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Animáció keyframes */
+@keyframes bump {
+  0% { transform: scale(1); }
+  10% { transform: scale(1.3); }
+  30% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  70% { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+
+/* Animáció hozzáadása, ha a kosárba új termék kerül */
+.cart-badge.bump {
+  animation: bump 0.3s ease-out;
+}
+
+
 .search-icon {
   color: #e73861;
   cursor: pointer;
