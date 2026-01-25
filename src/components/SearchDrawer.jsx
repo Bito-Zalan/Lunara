@@ -1,10 +1,11 @@
 import { useMemo, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./SearchDrawer.css";
 
 function SearchDrawer({ isOpen, onClose, products = [] }) {
   const [term, setTerm] = useState("");
+  const navigate = useNavigate();
 
-  // opcionális: nyitáskor ürítsük
   useEffect(() => {
     if (!isOpen) return;
     setTerm("");
@@ -17,29 +18,25 @@ function SearchDrawer({ isOpen, onClose, products = [] }) {
     return products.filter((p) => {
       const name = (p.name || "").toLowerCase();
       const category = (p.category || "").toLowerCase();
-
-      // csak név + kategória, de "tartalmazza" alapon
       return name.includes(q) || category.includes(q);
     });
   }, [term, products]);
 
   const handleClear = () => setTerm("");
 
+  const goToProduct = (id) => {
+    navigate(`/product/${id}`);
+    onClose();
+  };
+
   return (
     <>
-      <div
-        className={`search-overlay ${isOpen ? "show" : ""}`}
-        onClick={onClose}
-      />
+      <div className={`search-overlay ${isOpen ? "show" : ""}`} onClick={onClose} />
 
       <div className={`search-drawer ${isOpen ? "open" : ""}`}>
         <div className="search-header">
           <h2>Keresés</h2>
-          <button
-            className="search-close"
-            onClick={onClose}
-            aria-label="Bezárás"
-          >
+          <button className="search-close" onClick={onClose} aria-label="Bezárás">
             ✕
           </button>
         </div>
@@ -54,10 +51,7 @@ function SearchDrawer({ isOpen, onClose, products = [] }) {
               onChange={(e) => setTerm(e.target.value)}
               autoFocus={isOpen}
             />
-
-            <button className="search-clear" onClick={handleClear}>
-              Törlés
-            </button>
+            <button className="search-clear" onClick={handleClear}>Törlés</button>
           </div>
 
           <div className="search-results">
@@ -74,6 +68,11 @@ function SearchDrawer({ isOpen, onClose, products = [] }) {
                 <div
                   key={p.id ?? `${p.name}-${idx}`}
                   className="search-result-item"
+                  onClick={() => goToProduct(p.id)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => e.key === "Enter" && goToProduct(p.id)}
+                  style={{ cursor: "pointer" }}
                 >
                   {idx !== 0 && <hr className="search-divider" />}
 
@@ -83,18 +82,14 @@ function SearchDrawer({ isOpen, onClose, products = [] }) {
                         src={p.image}
                         alt={p.name}
                         className="search-result-img"
-                        onError={(e) =>
-                          (e.currentTarget.style.display = "none")
-                        }
+                        onError={(e) => (e.currentTarget.style.display = "none")}
                       />
                     </div>
 
                     <div className="search-result-info">
                       <div className="search-result-name">{p.name}</div>
-
                       <div className="search-result-meta">
                         <span>{p.category}</span>
-
                         {typeof p.price === "number" && (
                           <span className="search-result-price">
                             {p.price.toLocaleString("hu-HU")} Ft
@@ -113,6 +108,7 @@ function SearchDrawer({ isOpen, onClose, products = [] }) {
 }
 
 export default SearchDrawer;
+
 
 
 
