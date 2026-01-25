@@ -1,13 +1,14 @@
-/* ====== Drawer alap (maradjon úgy, mint eddig) ====== */
+/* ====== Drawer alap (overlay + slide-in) ====== */
 .cart-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
   z-index: 998;
 }
+
 .cart-overlay.show {
   opacity: 1;
   pointer-events: all;
@@ -16,19 +17,20 @@
 .cart-drawer {
   position: fixed;
   top: 0;
-  right: -380px;
+  right: -380px;           /* csúsztatva kint legyen */
   width: 380px;
   max-width: 92vw;
-  height: 100%;
+  height: 100vh;
   background: #fff;
-  box-shadow: -8px 0 25px rgba(0,0,0,0.15);
+  box-shadow: -8px 0 25px rgba(0, 0, 0, 0.15);
   transition: right 0.35s ease;
   z-index: 999;
   display: flex;
   flex-direction: column;
 }
+
 .cart-drawer.open {
-  right: 0;
+  right: 0;               /* bejön jobbról */
 }
 
 .cart-header {
@@ -38,11 +40,13 @@
   padding: 1.1rem 1.2rem;
   border-bottom: 1px solid #eee;
 }
+
 .cart-header h2 {
   margin: 0;
   color: #e73861;
   font-size: 1.1rem;
 }
+
 .cart-close {
   border: none;
   background: none;
@@ -51,6 +55,7 @@
   line-height: 1;
 }
 
+/* ====== Tartalom görgethető ====== */
 .cart-content {
   padding: 1.2rem;
   overflow-y: auto;
@@ -59,12 +64,28 @@
   gap: 1rem;
 }
 
-.cart-empty {
-  margin: 0;
-  color: #666;
+/* ====== Üres állapot ====== */
+.cart-empty-state {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 1.2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
 }
 
-/* ====== Lista kinézet (mint a kereső) ====== */
+.cart-empty-title {
+  margin: 0 0 0.3rem 0;
+  font-weight: 900;
+  color: #e73861;
+}
+
+.cart-empty-sub {
+  margin: 0 0 1rem 0;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* ====== Lista (kereső-szerű) ====== */
 .cart-divider {
   border: none;
   border-top: 1px solid #eee;
@@ -90,6 +111,7 @@
   cursor: pointer;
   flex-shrink: 0;
 }
+
 .cart-imgwrap img {
   width: 100%;
   height: 100%;
@@ -166,7 +188,7 @@
   align-self: flex-start;
 }
 
-/* ====== Alul: végösszeg + gomb ====== */
+/* ====== Végösszeg + gombok ====== */
 .cart-total {
   margin-top: 1rem;
   padding-top: 1rem;
@@ -189,5 +211,24 @@
   font-weight: 900;
   cursor: pointer;
 }
+
+.cart-continue-btn {
+  width: 100%;
+  background: #e73861;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 0.9rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.cart-continue-btn.secondary {
+  margin-top: 0.7rem;
+  background: #fff;
+  color: #e73861;
+  border: 1px solid #e73861;
+}
+
 
 
