@@ -1,0 +1,400 @@
+/* FONTOS: globál css néha szétveri az inputokat.
+   Itt direkt mindent a .checkout alatt célzunk, hogy ne csússzon szét. */
+
+.checkout {
+  padding: 28px 16px;
+}
+
+.checkoutShell {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.checkoutGrid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 18px;
+  align-items: start;
+}
+
+/* BAL panel */
+.checkoutPanel {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.checkoutTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.checkoutTitle {
+  margin: 0;
+  color: #e73861;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.linkBack {
+  color: #e73861;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+/* step jelző (nem kattintható) */
+.stepHeader {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.stepItem {
+  border: 1px solid #eee;
+  background: #fafafa;
+  border-radius: 14px;
+  padding: 10px 12px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.stepItem.active {
+  border-color: #e73861;
+  background: #fff;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+}
+
+.stepItem.done {
+  border-color: rgba(231, 56, 97, 0.25);
+}
+
+.stepDot {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  color: #e73861;
+  background: rgba(231, 56, 97, 0.12);
+}
+
+.stepItem.active .stepDot {
+  background: #e73861;
+  color: #fff;
+}
+
+.stepLabel {
+  font-weight: 900;
+  color: #222;
+}
+
+/* kártyák */
+.card {
+  margin-top: 14px;
+  border: 1px solid #eee;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.cardHead {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 14px;
+  background: linear-gradient(90deg, rgba(231, 56, 97, 0.14), rgba(231, 56, 97, 0.03));
+  border-bottom: 1px solid #eee;
+}
+
+.cardBadge {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: #e73861;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+}
+
+.cardTitle {
+  font-weight: 900;
+  color: #222;
+}
+
+.cardSub {
+  font-weight: 700;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.cardBody {
+  padding: 14px;
+}
+
+/* mezők */
+.checkout .field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.checkout .field label {
+  font-weight: 900;
+  color: #333;
+}
+
+.checkout input,
+.checkout textarea,
+.checkout select {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  padding: 12px 14px;
+  outline: none;
+  font-size: 0.95rem;
+  background: #fff;
+}
+
+.checkout textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.checkout input.invalid,
+.checkout textarea.invalid,
+.checkout select.invalid {
+  border-color: #e73861;
+  box-shadow: 0 0 0 3px rgba(231, 56, 97, 0.12);
+}
+
+.err {
+  color: #e73861;
+  font-weight: 900;
+  font-size: 0.88rem;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* fizetés */
+.pillRow {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.pill {
+  flex: 1;
+  border: 1px solid #e73861;
+  background: #fff;
+  color: #e73861;
+  font-weight: 900;
+  border-radius: 14px;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.pill.active {
+  background: #e73861;
+  color: #fff;
+}
+
+.payBox {
+  border: 1px solid #eee;
+  background: #fafafa;
+  border-radius: 18px;
+  padding: 14px;
+}
+
+.infoBox {
+  border: 1px solid #eee;
+  background: #fafafa;
+  border-radius: 18px;
+  padding: 14px;
+  color: #666;
+  font-weight: 800;
+}
+
+/* nav */
+.wizardNav {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.btnPrimary {
+  background: #e73861;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.btnPrimary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btnGhost {
+  background: #fff;
+  color: #e73861;
+  border: 1px solid #e73861;
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.btnGhost:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.muted {
+  color: #666;
+  font-weight: 700;
+}
+
+.muted.small {
+  font-size: 0.9rem;
+}
+
+/* JOBB oldal */
+.summaryPanel {
+  position: sticky;
+  top: 14px;
+  height: fit-content;
+}
+
+.summaryCard {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.summaryHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.summaryTitle {
+  color: #e73861;
+  font-weight: 900;
+  font-size: 20px;
+}
+
+.tinyLink {
+  color: #e73861;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.summaryList {
+  margin-top: 12px;
+}
+
+.divider {
+  height: 1px;
+  background: #eee;
+  margin: 12px 0;
+}
+
+.sumRow {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.sumImg {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  border: 1px solid #eee;
+  background: #fafafa;
+  overflow: hidden;
+}
+
+.sumImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sumName {
+  font-weight: 900;
+  color: #222;
+}
+
+.sumMeta {
+  color: #777;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.sumPrice {
+  font-weight: 900;
+  color: #222;
+  white-space: nowrap;
+}
+
+.totals {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #eee;
+}
+
+.totRow {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 900;
+  color: #333;
+  padding: 4px 0;
+}
+
+.totRow.total {
+  color: #e73861;
+  font-size: 1.05rem;
+}
+
+/* mobil */
+@media (max-width: 980px) {
+  .checkoutGrid {
+    grid-template-columns: 1fr;
+  }
+  .summaryPanel {
+    position: static;
+  }
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+  .wizardNav {
+    grid-template-columns: 1fr;
+  }
+  .stepHeader {
+    grid-template-columns: 1fr;
+  }
+}
+
+

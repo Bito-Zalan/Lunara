@@ -25,10 +25,7 @@ function CartDrawer({ isOpen, onClose }) {
 
   const handleCheckout = () => {
     if (cartItems.length === 0) return;
-
-    // később itt lesz backend checkout
-    alert(`Rendelés leadva! Összeg: ${totalPrice.toLocaleString("hu-HU")} Ft`);
-    clearCart();
+    navigate("/checkout");
     onClose();
   };
 

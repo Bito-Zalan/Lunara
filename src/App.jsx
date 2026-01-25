@@ -6,6 +6,8 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Velemenyek from "./pages/Velemenyek";
 import ProductPage from "./pages/ProductPage";
+import CheckOutPage from "./pages/CheckOutPage";
+
 
 function App() {
   const products = [
@@ -25,6 +27,7 @@ function App() {
           <Route path="/" element={<Home products={products} />} />
           <Route path="/velemenyek" element={<Velemenyek />} />
           <Route path="/product/:id" element={<ProductPage products={products} />} />
+          <Route path="/checkout" element={<CheckOutPage />} />
         </Routes>
 
         <div className="page-divider"></div>
