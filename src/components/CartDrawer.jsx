@@ -10,7 +10,7 @@ function CartDrawer({ isOpen, onClose }) {
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
-    clearCart
+    clearCart,
   } = useCart();
 
   const totalPrice = cartItems.reduce(
@@ -23,13 +23,11 @@ function CartDrawer({ isOpen, onClose }) {
     onClose();
   };
 
-  // Checkout gomb funkció (jelenleg csak alert)
   const handleCheckout = () => {
     if (cartItems.length === 0) {
       alert("A kosár üres!");
       return;
     }
-    // Később itt hívjuk a backend API-t
     alert(`Rendelés leadva! Összeg: ${totalPrice.toLocaleString("hu-HU")} Ft`);
     clearCart();
     onClose();
@@ -45,60 +43,91 @@ function CartDrawer({ isOpen, onClose }) {
       <div className={`cart-drawer ${isOpen ? "open" : ""}`}>
         <div className="cart-header">
           <h2>Kosár</h2>
-          <button onClick={onClose}>✕</button>
+          <button onClick={onClose} className="cart-close">✕</button>
         </div>
 
         <div className="cart-content">
-          {cartItems.length === 0 && <p>A kosarad jelenleg üres.</p>}
+          {cartItems.length === 0 && (
+            <p className="cart-empty">A kosarad jelenleg üres.</p>
+          )}
 
-          {cartItems.map((item) => (
-            <div
-              key={item.id}
-              className="cart-item"
-              style={{ cursor: "pointer" }}
-              onClick={() => goToProduct(item.id)}
-            >
-              <img src={item.image} alt={item.name} />
+          {cartItems.length > 0 && (
+            <div className="cart-list">
+              {cartItems.map((item, idx) => (
+                <div key={item.id} className="cart-list-item">
+                  {idx !== 0 && <hr className="cart-divider" />}
 
-              <div>
-                <h4>{item.name}</h4>
-                <p>Egységár: {item.price.toLocaleString("hu-HU")} Ft</p>
+                  <div className="cart-row">
+                    <div
+                      className="cart-imgwrap"
+                      onClick={() => goToProduct(item.id)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => e.key === "Enter" && goToProduct(item.id)}
+                    >
+                      <img src={item.image} alt={item.name} />
+                    </div>
 
-                <div
-                  className="quantity-controls"
-                  onClick={(e) => e.stopPropagation()} // gombok ne navigáljanak
-                >
-                  <button onClick={() => decreaseQuantity(item.id)}>-</button>
-                  <span>{item.quantity}</span>
-                  <button onClick={() => increaseQuantity(item.id)}>+</button>
+                    <div className="cart-info">
+                      <div
+                        className="cart-top"
+                        onClick={() => goToProduct(item.id)}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => e.key === "Enter" && goToProduct(item.id)}
+                      >
+                        <div className="cart-name">{item.name}</div>
+                        <div className="cart-price">
+                          {item.price.toLocaleString("hu-HU")} Ft
+                        </div>
+                      </div>
+
+                      <div
+                        className="cart-qty"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <button
+                          className="qty-btn"
+                          onClick={() => decreaseQuantity(item.id)}
+                        >
+                          -
+                        </button>
+                        <span className="qty-num">{item.quantity}</span>
+                        <button
+                          className="qty-btn"
+                          onClick={() => increaseQuantity(item.id)}
+                        >
+                          +
+                        </button>
+                      </div>
+
+                      <div className="cart-line-total">
+                        Összesen:{" "}
+                        <b>
+                          {(item.price * item.quantity).toLocaleString("hu-HU")} Ft
+                        </b>
+                      </div>
+
+                      <button
+                        className="cart-remove"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          removeFromCart(item.id);
+                        }}
+                      >
+                        Törlés
+                      </button>
+                    </div>
+                  </div>
                 </div>
-
-                <p>
-                  Összesen: {(item.price * item.quantity).toLocaleString("hu-HU")} Ft
-                </p>
-              </div>
-
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  removeFromCart(item.id);
-                }}
-              >
-                Törlés
-              </button>
+              ))}
             </div>
-          ))}
+          )}
 
           {cartItems.length > 0 && (
             <div className="cart-total">
               <h3>Végösszeg: {totalPrice.toLocaleString("hu-HU")} Ft</h3>
-              <button
-                className="checkout-btn"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleCheckout();
-                }}
-              >
+              <button className="checkout-btn" onClick={handleCheckout}>
                 Megrendelés
               </button>
             </div>
@@ -110,5 +139,6 @@ function CartDrawer({ isOpen, onClose }) {
 }
 
 export default CartDrawer;
+
 
 
