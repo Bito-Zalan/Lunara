@@ -1,0 +1,136 @@
+/* Header.css */
+
+/* Alap navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  /* bal-jobb elrendezés */
+  align-items: center;
+  /* minden elem függőlegesen középre */
+  padding: 0.8rem 2rem;
+  background-color: #fff;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  flex-wrap: nowrap;
+  /* ne törjön új sorba */
+}
+
+/* Balra logó */
+.logo {
+  display: flex;
+  align-items: center;
+  /* középre a szöveg az SVG-ben */
+  height: 80px;
+  justify-content: center;
+}
+
+.logo img {
+  height: 70px;
+  /* igen, ennyi kell */
+  width: auto;
+  /* object-fit: contain; */
+  justify-content: center;
+}
+
+
+/* Jobb oldal: linkek + kosár */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  /* távolság linkek és kosár között */
+}
+
+/* Linkek listája */
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #e73861;
+  font-weight: 700;
+  position: relative;
+}
+
+.nav-links a:hover::after {
+  content: '';
+  display: block;
+  height: 2px;
+  background: #e73861;
+  width: 100%;
+  margin-top: 2px;
+  border-radius: 1px;
+}
+
+/* Kosár ikon */
+.cart-icon {
+  color: #e73861;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.cart-icon svg {
+  width: 23px;
+  height: 30px;
+}
+
+.search-icon {
+  color: #e73861;
+  cursor: pointer;
+  display: flex;
+  margin-left: 1rem;
+}
+
+.search-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.hamburger-icon{
+  color: #e73861;
+  cursor: pointer;
+  display: flex;
+}
+
+.hamburger-icon svg {
+  width: 25px;
+  height: 35px;
+}
+
+/* Reszponzív */
+/* @media (max-width: 900px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .nav-right {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .nav-links {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .logo img {
+    justify-content: center;
+  }
+
+  .nav-links a {
+    font-size: 1rem;
+  }
+
+  .cart-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+} */

@@ -1,0 +1,47 @@
+.kontakt-main {
+  padding: 3rem 1rem;
+  max-width: 500px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  text-align: center; /* középre */
+}
+
+.kontakt-title {
+  margin-bottom: 2rem;
+  font-size: 3rem;
+  color: black;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  color: #333;
+  align-items: center; /* sorok középre */
+}
+
+.contact-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.contact-row .label {
+  font-weight: 600;
+  color: #000000;
+}
+
+.contact-row .value {
+  color: #000000;
+}
+
+.contacth1{
+  border-bottom: 1px solid black;
+  font-size: 3rem;
+  margin-bottom: 30px;
+}
+
+
+
