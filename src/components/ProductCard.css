@@ -1,10 +1,10 @@
 .add-to-cart-btn {
   padding: 0.6rem 1.2rem;
-  background-color: #e73861;
-  color: white;
+  /* background-color: #e73861; */
+  color: black;
   border: none;
   border-radius: 6px;
-  font-weight: bold;
+  /* font-weight: bold; */
   cursor: pointer;
   transition: transform 0.1s ease, background-color 0.2s ease;
 }
@@ -18,3 +18,57 @@
   transform: scale(0.9); /* kicsit összenyomódik */
   background-color: #d32f55;
 }
+
+.product-card {
+  min-width: 0;
+}
+
+.product-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.6rem;
+}
+
+/* az ikon gomb fix méret */
+.cart-icon-btn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #e73861;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s ease, background-color 0.2s ease;
+}
+
+.cart-icon-btn:hover {
+  background-color: #c1274b;
+}
+
+.cart-icon-btn.clicked {
+  transform: scale(0.9);
+  background-color: #d32f55;
+}
+
+/* EZ kicsinyíti le az SVG-t */
+.cart-icon-btn svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+
+
+
