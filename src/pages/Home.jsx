@@ -1,17 +1,9 @@
-import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import SkeletonCard from "../components/SkeletonCard";
+import { useProducts } from "../context/ProductsContext";
 
-function Home({ products }) {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 800);
-
-    return () => clearTimeout(timer);
-  }, []);
+function Home() {
+  const { products, loadingProducts, productsError } = useProducts();
 
   return (
     <main>
@@ -28,18 +20,9 @@ function Home({ products }) {
         </div>
 
         <div className="hero-badges">
-          <div className="badge">
-            <span className="badge-icon" aria-hidden="true" />
-            Gyors szállítás
-          </div>
-          <div className="badge">
-            <span className="badge-icon" aria-hidden="true" />
-            Biztonságos vásárlás
-          </div>
-          <div className="badge">
-            <span className="badge-icon" aria-hidden="true" />
-            Prémium minőség
-          </div>
+          <div className="badge">Gyors szállítás</div>
+          <div className="badge">Biztonságos vásárlás</div>
+          <div className="badge">Prémium minőség</div>
         </div>
       </section>
 
@@ -53,12 +36,12 @@ function Home({ products }) {
           </div>
         </div>
 
+        {productsError && <p style={{ color: "crimson" }}>{productsError}</p>}
+
         <div className="products-grid">
-          {loading
+          {loadingProducts
             ? Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)
-            : products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
+            : products.map((p) => <ProductCard key={p.id} product={p} />)}
         </div>
       </section>
     </main>
@@ -66,6 +49,8 @@ function Home({ products }) {
 }
 
 export default Home;
+
+
 
 
 

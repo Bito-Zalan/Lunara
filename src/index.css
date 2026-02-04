@@ -426,42 +426,6 @@ footer {
   }
 }
 
-/* ===== Info kártyák a hero alatt ===== */
-
-.info-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.6rem;
-  margin-top: 0.7rem;
-}
-
-.info-card {
-  background: rgba(255,255,255,0.85);
-  border-radius: 14px;
-  padding: 0.6rem 0.7rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 700;
-  color: #333;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
-}
-
-/* kis letisztult jel */
-.info-icon {
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: #e73861;
-  flex-shrink: 0;
-}
-
-/* Mobilon egymás alá */
-@media (max-width: 640px) {
-  .info-cards {
-    grid-template-columns: 1fr;
-  }
-}
 
 
 /* Extra kicsi (<=420): badge-ek egymás alá (soha nem lóg ki) */

@@ -1,10 +1,12 @@
+import { ProductsProvider, useProducts } from "./context/ProductsContext";
+import { CartProvider } from "./context/CartContext";
 import { AuthProvider } from "./context/AuthContext";
+
 import RequireAdmin from "./components/RequireAdmin";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { CartProvider } from "./context/CartContext";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -13,19 +15,8 @@ import Velemenyek from "./pages/Velemenyek";
 import ProductPage from "./pages/ProductPage";
 import CheckOutPage from "./pages/CheckOutPage";
 
-
-
-function App() {
-  const products = [
-    { id: 1, name: "Luxury Lipstick", category: "Makeup", price: 1299, description: "Vibrant and long-lasting color.", image: "/assets/lipstick.jpg" },
-    { id: 2, name: "Spa Gift Box", category: "Ajándékcsomag", price: 2999, description: "Relaxing bath & body products.", image: "/assets/spabox.jpg" },
-    { id: 3, name: "Face Cream", category: "Beauty", price: 1850, description: "Hydrating cream for all skin types.", image: "/assets/facecream.jpg" },
-    { id: 4, name: "Perfume Set", category: "Beauty", price: 3600, description: "Lovely fragrance for everyday use.", image: "/assets/perfume.jpg" },
-    { id: 5, name: "Luxury Lipstick", category: "Makeup", price: 1299, description: "Vibrant and long-lasting color.", image: "/assets/lipstick.jpg" },
-    { id: 6, name: "Spa Gift Box", category: "Ajándékcsomag", price: 2999, description: "Relaxing bath & body products.", image: "/assets/spabox.jpg" },
-    { id: 7, name: "Face Cream", category: "Beauty", price: 1850, description: "Hydrating cream for all skin types.", image: "/assets/facecream.jpg" },
-    { id: 8, name: "Perfume Set", category: "Beauty", price: 3600, description: "Lovely fragrance for everyday use.", image: "/assets/perfume.jpg" },
-  ];
+function AppInner() {
+  const { products } = useProducts();
 
   return (
     <CartProvider>
@@ -35,9 +26,9 @@ function App() {
           <div className="page-divider"></div>
 
           <Routes>
-            <Route path="/" element={<Home products={products} />} />
+            <Route path="/" element={<Home />} />
             <Route path="/velemenyek" element={<Velemenyek />} />
-            <Route path="/product/:id" element={<ProductPage products={products} />} />
+            <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/checkout" element={<CheckOutPage />} />
             <Route path="/login" element={<Login />} />
             <Route
@@ -56,9 +47,15 @@ function App() {
       </AuthProvider>
     </CartProvider>
   );
-
 }
 
-export default App;
+export default function App() {
+  return (
+    <ProductsProvider>
+      <AppInner />
+    </ProductsProvider>
+  );
+}
+
 
 
