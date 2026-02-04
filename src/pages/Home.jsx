@@ -1,6 +1,18 @@
+import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
+import SkeletonCard from "../components/SkeletonCard";
 
 function Home({ products }) {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 800);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <main>
       <section className="hero-compact">
@@ -30,6 +42,7 @@ function Home({ products }) {
           </div>
         </div>
       </section>
+
       <section className="products-section" id="termekek">
         <div className="products-topbar">
           <div className="category-chips">
@@ -41,9 +54,11 @@ function Home({ products }) {
         </div>
 
         <div className="products-grid">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+          {loading
+            ? Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)
+            : products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
         </div>
       </section>
     </main>
@@ -51,6 +66,7 @@ function Home({ products }) {
 }
 
 export default Home;
+
 
 
 
